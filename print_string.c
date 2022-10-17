@@ -32,13 +32,13 @@ int print_string(char *str)
 {
 	int characters = 0;
 
-	if (str != NULL)
+	if (str == NULL)
+		return (print_string("(null)"));
+
+	while (*str != '\0')
 	{
-		while (*str != '\0')
-		{
-			characters += _putchar(*str);
-			str++;
-		}
+		characters += _putchar(*str);
+		str++;
 	}
 	return (characters);
 }
