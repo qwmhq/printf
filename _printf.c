@@ -11,6 +11,8 @@ int print_c(va_list ap)
 	return (_putchar(va_arg(ap, int)));
 }
 
+
+
 /**
  * print_s - helper function for _printf
  *
@@ -20,6 +22,17 @@ int print_c(va_list ap)
 int print_s(va_list ap)
 {
 	return (print_string(va_arg(ap, char *)));
+}
+
+/**
+ * print_d - helper function for _printf
+ *
+ * @ap: arguments va_list
+ * Return: returns 0 if success
+ */
+int print_d(va_list ap)
+{
+	return (print_num(va_arg(ap, int)));
 }
 
 /**
@@ -33,6 +46,7 @@ int (*get_format_func(char c))(va_list)
 	format_t ff[] = {
 		{'c', print_c},
 		{'s', print_s},
+		{'d', print_d},
 		{0, NULL}
 	};
 	int i = 0;

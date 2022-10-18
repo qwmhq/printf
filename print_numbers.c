@@ -7,6 +7,7 @@
  * @b: the base in which to find the number of digits
  * Return: the number of digits to n has in base b
  */
+
 int number_digits(int n, int b)
 {
 	unsigned int digits = 0;

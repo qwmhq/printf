@@ -12,6 +12,7 @@ int string_length(char *str);
 int number_digits(int n, int b);
 int print_number(unsigned long num, int base);
 int print_decimal(int n);
+int print_num(int n);
 
 /**
  * struct format_struct - format struct
@@ -27,5 +28,6 @@ typedef struct format_struct
 
 int print_c(va_list ap);
 int print_s(va_list ap);
+int print_d(va_list ap);
 
 #endif
