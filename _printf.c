@@ -23,6 +23,17 @@ int print_s(va_list ap)
 }
 
 /**
+ * print_d - helper function for _printf
+ *
+ * @ap: arguments va_list
+ * Return: number of characters printed
+ */
+int print_d(va_list ap)
+{
+	return (print_decimal(va_arg(ap, int)));
+}
+
+/**
  * get_format_func - select the correct function to print a format
  *
  * @c: the char representing the format
@@ -33,6 +44,8 @@ int (*get_format_func(char c))(va_list)
 	format_t ff[] = {
 		{'c', print_c},
 		{'s', print_s},
+		{'d', print_d},
+		{'i', print_d},
 		{0, NULL}
 	};
 	int i = 0;

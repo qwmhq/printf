@@ -37,7 +37,7 @@ int print_decimal(int n)
 	if (n < 0)
 	{
 		no_of_digits += _putchar('-');
-
+		num = -num;
 	}
 
 	if ((num / 10) > 0)
