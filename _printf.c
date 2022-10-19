@@ -46,6 +46,7 @@ int (*get_format_func(char c))(va_list)
 		{'s', print_s},
 		{'d', print_d},
 		{'i', print_d},
+		{'b', print_b},
 		{0, NULL}
 	};
 	int i = 0;

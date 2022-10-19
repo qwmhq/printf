@@ -57,9 +57,31 @@ int print_decimal(int n)
  * @base: the base in which to print the number
  * Return: the number of characters printed
  */
-int print_number(unsigned long num, int base)
+int print_number(unsigned int num, int base)
 {
 	char *d = "0123456789abcdef";
+	int len = 0;
+
+	if (num / base)
+	{
+		len += print_number(num / base, base);
+	}
+
+	len += _putchar(d[num % base]);
+
+	return (len);
+}
+
+/**
+ * print_number - print a number in number in a particular base
+ *
+ * @num: the number to print
+ * @base: the base in which to print the number
+ * Return: the number of characters printed
+ */
+int print_number_upper(unsigned int num, int base)
+{
+	char *d = "0123456789ABCDEF";
 	int len = 0;
 
 	if (num / base)

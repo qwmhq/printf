@@ -10,7 +10,8 @@ int _putchar(char c);
 int print_string(char *str);
 int string_length(char *str);
 int number_digits(int n, int b);
-int print_number(unsigned long num, int base);
+int print_number(unsigned int num, int base);
+int print_number_upper(unsigned int num, int base);
 int print_decimal(int n);
 
 /**
@@ -27,5 +28,6 @@ typedef struct format_struct
 
 int print_c(va_list ap);
 int print_s(va_list ap);
+int print_b(va_list ap);
 
 #endif
