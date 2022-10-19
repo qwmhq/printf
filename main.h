@@ -29,5 +29,9 @@ typedef struct format_struct
 int print_c(va_list ap);
 int print_s(va_list ap);
 int print_b(va_list ap);
+int print_u(va_list ap);
+int print_o(va_list ap);
+int print_x(va_list ap);
+int print_X(va_list ap);
 
 #endif

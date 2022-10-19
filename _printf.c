@@ -47,6 +47,10 @@ int (*get_format_func(char c))(va_list)
 		{'d', print_d},
 		{'i', print_d},
 		{'b', print_b},
+		{'u', print_u},
+		{'o', print_o},
+		{'x', print_x},
+		{'X', print_X},
 		{0, NULL}
 	};
 	int i = 0;

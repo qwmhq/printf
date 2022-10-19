@@ -86,7 +86,7 @@ int print_number_upper(unsigned int num, int base)
 
 	if (num / base)
 	{
-		len += print_number(num / base, base);
+		len += print_number_upper(num / base, base);
 	}
 
 	len += _putchar(d[num % base]);
