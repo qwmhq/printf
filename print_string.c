@@ -41,3 +41,32 @@ int print_string(char *str)
 	}
 	return (characters);
 }
+
+/**
+ * print_string_custom - custom print function
+ *
+ * @str: the string to print
+ * Return: the number of characters printed
+ */
+int print_string_custom(char *str)
+{
+	int characters = 0;
+
+	if (str == NULL)
+		return (print_string("(null)"));
+
+	while (*str)
+	{
+		if ((*str > 0 && *str < 32) || *str >= 127)
+		{
+			characters += print_string("\\x");
+			if (*str < 0x10)
+				characters += _putchar('0');
+			characters += print_number_upper(*str, 16);
+		}
+		else
+			characters += _putchar(*str);
+		str++;
+	}
+	return (characters);
+}

@@ -1,67 +1,24 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
- * print_c - helper function for _printf
+ * print_string_slice - print a slice of a string
  *
- * @ap: arguments va_list
+ * @str: string
+ * @a: start index
+ * @b: end index
  * Return: number of characters printed
  */
-int print_c(va_list ap)
+int print_string_slice(char *str, int a, int b)
 {
-	return (_putchar(va_arg(ap, int)));
-}
+	int len = b - a;
 
-/**
- * print_s - helper function for _printf
- *
- * @ap: arguments va_list
- * Return: number of characters printed
- */
-int print_s(va_list ap)
-{
-	return (print_string(va_arg(ap, char *)));
-}
-
-/**
- * print_d - helper function for _printf
- *
- * @ap: arguments va_list
- * Return: number of characters printed
- */
-int print_d(va_list ap)
-{
-	return (print_decimal(va_arg(ap, int)));
-}
-
-/**
- * get_format_func - select the correct function to print a format
- *
- * @c: the char representing the format
- * Return: pointer to the appropriate function
- */
-int (*get_format_func(char c))(va_list)
-{
-	format_t ff[] = {
-		{'c', print_c},
-		{'s', print_s},
-		{'d', print_d},
-		{'i', print_d},
-		{'b', print_b},
-		{'u', print_u},
-		{'o', print_o},
-		{'x', print_x},
-		{'X', print_X},
-		{0, NULL}
-	};
-	int i = 0;
-
-	while (ff[i].c != 0)
+	while (a < b)
 	{
-		if (ff[i].c == c)
-			return (ff[i].f);
-		i++;
+		_putchar(str[a]);
+		a++;
 	}
-	return (NULL);
+	return (len);
 }
 
 /**
@@ -73,39 +30,42 @@ int (*get_format_func(char c))(va_list)
  */
 int _printf(const char *format, ...)
 {
-	int i = 0, len = 0;
+	int len = 0, i = 0, start_index;
 	va_list ap;
+	char *p = (char *)format;
 
 	va_start(ap, format);
 
 	if (format == NULL || (format[i] == '%' && format[i + 1] == '\0'))
 		return (-1);
 
-	while (format[i] != '\0')
+	while (format[i])
 	{
 		if (format[i] == '%')
 		{
-			int (*format_func)(va_list);
+			int (*specifier_func)(va_list, params_t *);
+			params_t *params = init_params();
 
-			if (format[i + 1] == '%')
+			start_index = i;
+			i++;
+			i += get_flags((p + i), params);
+			i += get_width((p + i), ap, params);
+
+			specifier_func = get_specifier_func(*(p + i));
+
+			if (specifier_func != NULL)
 			{
-				len += _putchar('%');
-				i += 2;
-				continue;
+				len += specifier_func(ap, params);
+				i++;
 			}
-			format_func = get_format_func(format[i + 1]);
-			if (format_func != NULL)
-			{
-				len += format_func(ap);
-				i += 2;
-				continue;
-			}
+			else
+				len += print_string_slice(p, start_index, i);
+			free_params(params);
+			continue;
 		}
-
 		len += _putchar(format[i]);
 		i++;
 	}
-
 	va_end(ap);
 	return (len);
 }
