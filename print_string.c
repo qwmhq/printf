@@ -70,3 +70,60 @@ int print_string_custom(char *str)
 	}
 	return (characters);
 }
+
+/**
+ * print_string_reverse - print a string in reverse
+ *
+ * @str: the string to print
+ * Return: number of characters printed
+ */
+int print_string_reverse(char *str)
+{
+	int characters = 0, str_len = string_length(str);
+
+	if (str == NULL)
+		return (print_string("(null)"));
+
+	while (str_len)
+	{
+		characters += _putchar(str[str_len - 1]);
+		str_len--;
+	}
+	return (characters);
+}
+
+/**
+ * print_string_rot13 - print a string using rot13 encryption
+ *
+ * @str: the string to print
+ * Return: number of characters printed
+ */
+int print_string_rot13(char *str)
+{
+	int characters = 0, i, j;
+	char *letters =
+		"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	char *encoded_letters =
+		"nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
+
+	if (str == NULL)
+		return (print_string("(null)"));
+
+	for (i = 0; i < string_length(str); i++)
+	{
+		if ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z'))
+		{
+			for (j = 0; j < string_length(letters); j++)
+			{
+				if (str[i] == letters[j])
+				{
+					characters += _putchar(encoded_letters[j]);
+					break;
+				}
+			}
+		}
+		else
+			characters += _putchar(str[i]);
+	}
+	return (characters);
+}

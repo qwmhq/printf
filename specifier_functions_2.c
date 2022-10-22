@@ -41,10 +41,27 @@ int print_p(va_list ap, params_t *params)
  */
 int print_r(va_list ap, params_t *params)
 {
-	int len = 0;
+	int len = 0, i = 0;
+	char *arg;
+	int len_arg;
 
-	(void)ap;
-	(void)params;
+	arg = va_arg(ap, char *);
+	len_arg = string_length(arg);
+
+	while (!params->minus_flag && (i < (params->width - len_arg)))
+	{
+		len += _putchar(' ');
+		i++;
+	}
+
+	len += print_string_reverse(arg);
+
+	while (params->minus_flag && i < (params->width - len_arg))
+	{
+		len += _putchar(' ');
+		i++;
+	}
+
 	return (len);
 }
 
@@ -57,9 +74,26 @@ int print_r(va_list ap, params_t *params)
  */
 int print_R(va_list ap, params_t *params)
 {
-	int len = 0;
+	int len = 0, i = 0;
+	char *arg;
+	int len_arg;
 
-	(void)ap;
-	(void)params;
+	arg = va_arg(ap, char *);
+	len_arg = string_length(arg);
+
+	while (!params->minus_flag && (i < (params->width - len_arg)))
+	{
+		len += _putchar(' ');
+		i++;
+	}
+
+	len += print_string_rot13(arg);
+
+	while (params->minus_flag && i < (params->width - len_arg))
+	{
+		len += _putchar(' ');
+		i++;
+	}
+
 	return (len);
 }

@@ -10,6 +10,8 @@ int _printf(const char *format, ...);
 int _putchar(char c);
 int print_string(char *str);
 int print_string_custom(char *str);
+int print_string_reverse(char *str);
+int print_string_rot13(char *str);
 int string_length(char *str);
 int number_digits(unsigned long n, int b);
 int print_number(unsigned long, int base);
