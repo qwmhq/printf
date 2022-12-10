@@ -8,6 +8,8 @@
 params_t *init_params(void)
 {
 	params_t *params = malloc(sizeof(params_t));
+    if (params == NULL)
+		exit(1);
 
 	params->plus_flag = 0;
 	params->space_flag = 0;
